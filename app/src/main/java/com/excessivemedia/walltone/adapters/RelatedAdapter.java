@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.excessivemedia.walltone.R;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.storage.FileDownloadTask;
@@ -29,7 +30,7 @@ public class RelatedAdapter extends RecyclerView.Adapter<RelatedAdapter.RelatedV
 
     public RelatedAdapter(ArrayList<DocumentSnapshot> relatedDocs) {
         list =relatedDocs;
-        thumbnails = FirebaseStorage.getInstance().getReference("Walls").child("Thumbnail");
+        thumbnails = FirebaseStorage.getInstance().getReference(Consts.WALLS).child(Consts.THUMBNAIL);
     }
 
     public void setOnRelatedSelectListener(OnRelatedImageSelected listener) {
@@ -43,7 +44,12 @@ public class RelatedAdapter extends RecyclerView.Adapter<RelatedAdapter.RelatedV
     @NonNull
     @Override
     public RelatedVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RelatedVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_related ,parent,false ));
+        return new RelatedVH(
+                LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.card_related
+                                ,parent,
+                                false )
+        );
     }
 
     @Override

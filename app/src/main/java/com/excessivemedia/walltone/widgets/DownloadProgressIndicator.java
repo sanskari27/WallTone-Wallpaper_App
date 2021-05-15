@@ -16,6 +16,7 @@ import com.google.android.material.progressindicator.CircularProgressIndicator;
 public class DownloadProgressIndicator extends Dialog {
     private final int ANIMATION_TIME = 3000;
     private final int ANIMATION_DURATION = 500;
+    private final String LOADING = "Loading";
 
     private CircularProgressIndicator progress;
     private TextView title, percentage;
@@ -40,7 +41,6 @@ public class DownloadProgressIndicator extends Dialog {
     }
 
     private void animateTitle() {
-        String loading = "Loading";
         String _1 = ".";
         String _2 = "..";
         String _3 = "...";
@@ -52,13 +52,13 @@ public class DownloadProgressIndicator extends Dialog {
                     switch (now){
                         case 0:
                         case 1:
-                            title.setText(String.format("%s%s", loading, _1)); break;
+                            title.setText(String.format("%s%s", LOADING, _1)); break;
                         case 2:
                         case 5:
-                            title.setText(String.format("%s%s", loading, _2)); break;
+                            title.setText(String.format("%s%s", LOADING, _2)); break;
                         case 3:
                         case 4:
-                            title.setText(String.format("%s%s", loading, _3)); break;
+                            title.setText(String.format("%s%s", LOADING, _3)); break;
                     }
                 }
 
@@ -87,7 +87,7 @@ public class DownloadProgressIndicator extends Dialog {
     }
     public void setMessage(String msg){
         title.setText(msg);
-        animateLoading(msg.contains("Loading"));
+        animateLoading(msg.contains(LOADING));
     }
 
     private void animateLoading(boolean val) {
@@ -97,7 +97,7 @@ public class DownloadProgressIndicator extends Dialog {
     @Override
     public void show() {
         super.show();
-        animateLoading(title.getText().toString().contains("Loading"));
+        animateLoading(title.getText().toString().contains(LOADING));
     }
 
     @Override

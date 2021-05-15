@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.excessivemedia.walltone.R;
 import com.excessivemedia.walltone.adapters.RelatedAdapter;
 import com.excessivemedia.walltone.adapters.Related_ItemDecoration;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.excessivemedia.walltone.helpers.ViewAnimator;
 import com.excessivemedia.walltone.helpers.LikeManager;
 import com.excessivemedia.walltone.helpers.SimpleGestureListener;
@@ -110,7 +111,7 @@ public class Showcase extends AppCompatActivity implements SimpleGestureListener
                         .load(thumbnailUri)
                         .into(showcase_iv);
             }
-            fetchWallpaper(doc.getString("name"));
+            fetchWallpaper(doc.getString(Consts.NAME));
 
         }
 
@@ -136,7 +137,8 @@ public class Showcase extends AppCompatActivity implements SimpleGestureListener
         progress.show();
         try {
             File tempFile = File.createTempFile(name, ".jpg");
-            StorageReference walls = FirebaseStorage.getInstance().getReference("Walls").child(name + ".jpg");
+            StorageReference walls = FirebaseStorage.getInstance()
+                                    .getReference(Consts.WALLS).child(name + ".jpg");
             FileDownloadTask file = walls.getFile(tempFile);
             file.addOnProgressListener(snapshot -> {
                 long l = (snapshot.getBytesTransferred() * 100) / snapshot.getTotalByteCount();

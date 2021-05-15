@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.excessivemedia.walltone.R;
 import com.excessivemedia.walltone.adapters.SearchAdapter;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.excessivemedia.walltone.helpers.ViewAnimator;
 import com.excessivemedia.walltone.widgets.Category.Categories;
 import com.excessivemedia.walltone.widgets.Category.OnCategorySelectedListener;
@@ -106,13 +107,13 @@ public class Home extends AppCompatActivity
             switch (item.getItemId()){
                 case R.id.liked:
                     intent = new Intent(this,SearchResult.class);
-                    intent.putExtra("type","like");
+                    intent.putExtra(Consts.TYPE,Consts.LIKE);
                     startActivity(intent);
                     
                     break;
                 case R.id.downloaded:
                     intent = new Intent(this,SearchResult.class);
-                    intent.putExtra("type","download");
+                    intent.putExtra(Consts.TYPE, Consts.DOWNLOADS);
                     startActivity(intent);
                     
                     break;
@@ -141,7 +142,7 @@ public class Home extends AppCompatActivity
     private void initRecent(){
         galleryView = findViewById(R.id.galleryView);
         galleryView.setGallerySelectedListener(this);
-        FirebaseFirestore.getInstance().collection("Walls").get().addOnSuccessListener(documents->{
+        FirebaseFirestore.getInstance().collection(Consts.WALLS).get().addOnSuccessListener(documents->{
             List<DocumentSnapshot> list = documents.getDocuments();
 //            createTag(list);
             CustomColorPicker.extractColors(list);
@@ -158,7 +159,7 @@ public class Home extends AppCompatActivity
         });
         findViewById(R.id.more).setOnClickListener(v->{
             Intent intent = new Intent(this,SearchResult.class);
-            intent.putExtra("type","more");
+            intent.putExtra(Consts.TYPE,Consts.MORE);
             startActivity(intent);
             
         });
@@ -197,7 +198,7 @@ public class Home extends AppCompatActivity
         colorPicker = findViewById(R.id.color_picker);
         colorPicker.setEnabled(true);
         colorPicker.setOnColorChangeListener(this);
-        final DatabaseReference tags = FirebaseDatabase.getInstance().getReference("Tags");
+        final DatabaseReference tags = FirebaseDatabase.getInstance().getReference(Consts.TAGS);
         searchRecycler.setHasFixedSize(false);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
@@ -223,7 +224,7 @@ public class Home extends AppCompatActivity
             public void afterTextChanged(Editable s) {
                 String text = s.toString().toLowerCase();
                 System.out.println(text);
-                tags.orderByChild("name").startAt(text)
+                tags.orderByChild(Consts.NAME).startAt(text)
                         .endAt(text+"\uf8ff").get().addOnSuccessListener(snapshot -> {
                             ArrayList<String> list = new ArrayList<>();
                             for (DataSnapshot ds:snapshot.getChildren()){
@@ -251,7 +252,7 @@ public class Home extends AppCompatActivity
                     .show();
             MaterialButton proceedBtn = view.findViewById(R.id.requestPermission);
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-                proceedBtn.setText(getString(R.string.open_setings));
+                proceedBtn.setText(Consts.OPEN_SETTING);
                 proceedBtn.setOnClickListener(v -> {
                     dialog.dismiss();
                     try {
@@ -300,8 +301,8 @@ public class Home extends AppCompatActivity
     @Override
     public void onCategorySelected(String category) {
         Intent intent = new Intent(this,SearchResult.class);
-        intent.putExtra("search",category);
-        intent.putExtra("type","category");
+        intent.putExtra(Consts.SEARCH,category);
+        intent.putExtra(Consts.TYPE,Consts.CATEGORY);
         startActivity(intent);
         
     }
@@ -319,8 +320,8 @@ public class Home extends AppCompatActivity
     @Override
     public void onSearchResultClickListener(String searchText) {
         Intent intent = new Intent(this,SearchResult.class);
-        intent.putExtra("search",searchText);
-        intent.putExtra("type","tag");
+        intent.putExtra(Consts.SEARCH,searchText);
+        intent.putExtra(Consts.TYPE,Consts.TAGS);
         startActivity(intent);
 
         new Handler().postDelayed(()-> toggleSearchLayout(false),1000);
@@ -330,8 +331,8 @@ public class Home extends AppCompatActivity
     public void onColorChanged(String color) {
         colorPicker.closeDialog();
         Intent intent = new Intent(this,SearchResult.class);
-        intent.putExtra("search",color);
-        intent.putExtra("type","color");
+        intent.putExtra(Consts.SEARCH,color);
+        intent.putExtra(Consts.TYPE,Consts.COLOR);
         startActivity(intent);
 
         new Handler().postDelayed(()-> toggleSearchLayout(false),1000);

@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.excessivemedia.walltone.R;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.excessivemedia.walltone.service.WallpaperChanger;
 import com.excessivemedia.walltone.widgets.ColorPicker.CustomColorPicker;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -23,7 +24,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BottomNavigation extends BottomSheetDialogFragment implements CustomColorPicker.ColorChangeListener {
-    private SwitchCompat autoWall;
     private CustomColorPicker colorPicker;
 
     public BottomNavigation() {
@@ -52,10 +52,10 @@ public class BottomNavigation extends BottomSheetDialogFragment implements Custo
             deleteAllFiles(v.getContext().getCacheDir());
             cacheSizeCheck(view);
         });
-        autoWall = (view.findViewById(R.id.switchAutoWallpaper));
+        SwitchCompat autoWall = (view.findViewById(R.id.switchAutoWallpaper));
         colorPicker = view.findViewById(R.id.colorPicker);
-        String selectedColor = context.getSharedPreferences("ColorPref",0)
-                .getString("selectedColor",null);
+        String selectedColor = context.getSharedPreferences(Consts.PREF_COLOR,0)
+                .getString(Consts.PREF_SELECTED_COLOR,null);
         colorPicker.setSelectedColor(selectedColor);
         colorPicker.setOnColorChangeListener(this);
 
@@ -73,9 +73,9 @@ public class BottomNavigation extends BottomSheetDialogFragment implements Custo
     @Override
     public void onColorChanged(String color) {
         if(getContext() == null) return;
-            getContext().getSharedPreferences("ColorPref",0)
+            getContext().getSharedPreferences(Consts.PREF_COLOR,0)
                     .edit()
-                    .putString("selectedColor",color)
+                    .putString(Consts.PREF_SELECTED_COLOR,color)
                     .apply();
     }
 
@@ -121,7 +121,6 @@ public class BottomNavigation extends BottomSheetDialogFragment implements Custo
         }
         final List<File> dirs = new LinkedList<>();
         dirs.add(file);
-        long result = 0;
         while (!dirs.isEmpty()) {
             final File dir = dirs.remove(0);
             if (!dir.exists())
@@ -130,7 +129,6 @@ public class BottomNavigation extends BottomSheetDialogFragment implements Custo
             if (listFiles == null || listFiles.length == 0)
                 continue;
             for (final File child : listFiles) {
-                result += child.length();
                 if (child.isDirectory())
                     dirs.add(child);
                 else child.delete();

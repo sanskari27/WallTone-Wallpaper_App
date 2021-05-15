@@ -14,6 +14,7 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.excessivemedia.walltone.helpers.Consts;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,20 +37,21 @@ public class WallpaperChanger extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Log.d(TAG,"Wallpaper Changer Triggered");
-        String colorCode = context.getSharedPreferences("ColorPref",0).getString("seletedColor",null);
+        String colorCode = context.getSharedPreferences(Consts.PREF_COLOR,0)
+                .getString(Consts.PREF_SELECTED_COLOR,null);
 
-        CollectionReference walls = FirebaseFirestore.getInstance().collection("Walls");
+        CollectionReference walls = FirebaseFirestore.getInstance().collection(Consts.WALLS);
         Query query;
         if(colorCode==null){
-            query = walls.whereGreaterThan("name", getRandomChar());
+            query = walls.whereGreaterThan(Consts.NAME, getRandomChar());
         }else {
-            query = walls.whereEqualTo("colorCode",colorCode);
+            query = walls.whereEqualTo(Consts.COLOR_CODE,colorCode);
         }
         query.get().addOnSuccessListener(queryDocumentSnapshots -> {
             List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();
             if(documents.size()==0) return;
             DocumentSnapshot documentSnapshot = documents.get((int) (Math.random() * documents.size()));
-            String name= documentSnapshot.getString("name");
+            String name= documentSnapshot.getString(Consts.NAME);
             if(name == null) return;
             downloadWall(context, name);
 
@@ -62,7 +64,7 @@ public class WallpaperChanger extends BroadcastReceiver {
             File tempFile = File.createTempFile(name, ".jpg");
 
             FirebaseStorage.getInstance()
-                    .getReference("Walls").child(name+".jpg")
+                    .getReference(Consts.WALLS).child(name+".jpg")
                     .getFile(tempFile)
                     .addOnSuccessListener(taskSnapshot -> setWallpaper(context, tempFile));
         }catch (IOException e){

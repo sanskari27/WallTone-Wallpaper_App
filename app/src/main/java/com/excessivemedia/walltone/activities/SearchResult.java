@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.excessivemedia.walltone.R;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.excessivemedia.walltone.helpers.LikeManager;
 import com.excessivemedia.walltone.widgets.GalleryView.Gallery;
 import com.excessivemedia.walltone.widgets.GalleryView.OnGalleryImageSelected;
@@ -34,8 +35,8 @@ public class SearchResult extends AppCompatActivity implements OnGalleryImageSel
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_search_result);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        searchType = getIntent().getStringExtra("type");
-        searchString = getIntent().getStringExtra("search");
+        searchType = getIntent().getStringExtra(Consts.TYPE);
+        searchString = getIntent().getStringExtra(Consts.SEARCH);
         title = findViewById(R.id.title);
         galleryView = findViewById(R.id.galleryView);
         galleryView.setGallerySelectedListener(this);
@@ -44,21 +45,28 @@ public class SearchResult extends AppCompatActivity implements OnGalleryImageSel
     @Override
     protected void onStart() {
         super.onStart();
-        walls = FirebaseFirestore.getInstance().collection("Walls");
+        walls = FirebaseFirestore.getInstance().collection(Consts.WALLS);
         if(!title.getText().toString().isEmpty())return;
         galleryView.clear();
-        if(searchType.equalsIgnoreCase("more")){
-            searchMore();
-        }else if(searchType.equalsIgnoreCase("category")){
-            searchCategory();
-        }else if(searchType.equalsIgnoreCase("tag")){
-            searchTag();
-        }else if(searchType.equalsIgnoreCase("download")){
-            openDownloads();
-        }else if(searchType.equalsIgnoreCase("like")){
-            likedWalls();
-        }else if(searchType.equalsIgnoreCase("color")){
-            searchColor();
+        switch (searchType) {
+            case Consts.MORE:
+                searchMore();
+                break;
+            case Consts.CATEGORY:
+                searchCategory();
+                break;
+            case Consts.TAGS:
+                searchTag();
+                break;
+            case Consts.DOWNLOADS:
+                openDownloads();
+                break;
+            case Consts.LIKE:
+                likedWalls();
+                break;
+            case Consts.COLOR:
+                searchColor();
+                break;
         }
     }
 
@@ -66,14 +74,14 @@ public class SearchResult extends AppCompatActivity implements OnGalleryImageSel
         title.setText(R.string.favourites);
         ArrayList<String> likedImagesId =  new LikeManager(this).getLikedImagesId();
         for (String s:likedImagesId){
-            walls.whereEqualTo("name",s)
+            walls.whereEqualTo(Consts.NAME,s)
                     .get()
                     .addOnSuccessListener(documents -> galleryView.loadWalls(documents.getDocuments()));
         }
     }
 
     private void openDownloads() {
-        title.setText(R.string.downloads);
+        title.setText(Consts.DOWNLOADS);
         new Handler().postDelayed(()->{
             ArrayList<String> downloads = new ArrayList<>();
             String[] what = new String[]{ MediaStore.Images.ImageColumns.DATA };
@@ -92,7 +100,6 @@ public class SearchResult extends AppCompatActivity implements OnGalleryImageSel
                 downloads.add(cursor.getString(0));
             }
             cursor.close();
-            title.setText(R.string.downloads);
             galleryView.loadWalls(downloads);
         },100);
 
@@ -100,27 +107,27 @@ public class SearchResult extends AppCompatActivity implements OnGalleryImageSel
 
     private void searchTag() {
         title.setText(searchString);
-        walls.whereArrayContains("Tags",searchString).get().addOnSuccessListener(documents -> {
+        walls.whereArrayContains(Consts.TAGS,searchString).get().addOnSuccessListener(documents -> {
             List<DocumentSnapshot> list = documents.getDocuments();
             Collections.shuffle(list);
             galleryView.loadWalls(list);
         });
     }
     private void searchColor() {
-        title.setText(getString(R.string.color));
-        walls.whereEqualTo("colorCode",searchString).get().addOnSuccessListener(documents -> {
+        title.setText(Consts.COLOR);
+        walls.whereEqualTo(Consts.COLOR_CODE,searchString).get().addOnSuccessListener(documents -> {
             List<DocumentSnapshot> list = documents.getDocuments();
             Collections.shuffle(list);
             galleryView.loadWalls(list);
             if(list.size()>0){
-                title.setText(list.get(0).getString("colorName"));
+                title.setText(list.get(0).getString(Consts.COLOR_NAME));
             }
         });
     }
 
     private void searchCategory() {
         title.setText(searchString);
-        walls.whereEqualTo("category",searchString).get().addOnSuccessListener(documents -> {
+        walls.whereEqualTo(Consts.CATEGORY,searchString).get().addOnSuccessListener(documents -> {
             List<DocumentSnapshot> list = documents.getDocuments();
             Collections.shuffle(list);
             galleryView.loadWalls(list);
@@ -128,7 +135,7 @@ public class SearchResult extends AppCompatActivity implements OnGalleryImageSel
     }
 
     private void searchMore() {
-        title.setText(R.string.wallpapers);
+        title.setText(Consts.WALLPAPERS);
         walls.get().addOnSuccessListener(documents->{
             List<DocumentSnapshot> list = documents.getDocuments();
             Collections.shuffle(list);

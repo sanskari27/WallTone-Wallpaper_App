@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.excessivemedia.walltone.R;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.excessivemedia.walltone.widgets.DownloadProgressIndicator;
 import com.excessivemedia.walltone.widgets.GalleryView.Gallery;
 import com.google.firebase.storage.FirebaseStorage;
@@ -64,7 +65,8 @@ public class Upload extends AppCompatActivity {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             Bitmap bmp = BitmapFactory.decodeFile(path);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            FirebaseStorage.getInstance().getReference("PendingWalls").child(getAlphaNumericString()+".jpg")
+            FirebaseStorage.getInstance().getReference(Consts.PENDING_WALLS)
+                    .child(getAlphaNumericString()+".jpg")
                 .putBytes(baos.toByteArray()).addOnProgressListener(snapshot -> {
                     long l = (snapshot.getBytesTransferred() * 100) / snapshot.getTotalByteCount();
                     progressIndicator.setProgress((int) l);

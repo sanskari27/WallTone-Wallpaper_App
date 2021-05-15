@@ -58,7 +58,7 @@ class ColorPickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }else{
             String color = colorList.get(position);
             ColorPickerVH pickerVH = (ColorPickerVH) holder;
-            pickerVH.colorpickerItem.setCardBackgroundColor(Color.parseColor(color));
+            pickerVH.colouredItem.setCardBackgroundColor(Color.parseColor(color));
             pickerVH.itemView.setOnClickListener(v->{
                 if(onColorSelected !=null){
                     onColorSelected.onColorSelected(color);
@@ -82,10 +82,10 @@ class ColorPickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     static class ColorPickerVH extends RecyclerView.ViewHolder{
-        private final CardView colorpickerItem;
+        private final CardView colouredItem;
         public ColorPickerVH(@NonNull View itemView) {
             super(itemView);
-            colorpickerItem = itemView.findViewById(R.id.colorpicker_item);
+            colouredItem = itemView.findViewById(R.id.colorpicker_item);
         }
     }
     static class ColorPickerWheelVH extends RecyclerView.ViewHolder{

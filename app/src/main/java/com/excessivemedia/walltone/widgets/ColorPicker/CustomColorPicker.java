@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.excessivemedia.walltone.R;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public class CustomColorPicker extends CardView implements View.OnClickListener 
 
 
     private void updateUI() {
-        Log.wtf("CustomColorPicker",selectedColor);
+        Log.wtf(CustomColorPicker.class.getSimpleName(),selectedColor);
         if(selectedColor == null || selectedColor.isEmpty()){
             (view.findViewById(R.id.color_wheel_icon)).setVisibility(VISIBLE);
 
@@ -114,7 +115,7 @@ public class CustomColorPicker extends CardView implements View.OnClickListener 
     public static void extractColors(List<DocumentSnapshot> list) {
         HashSet<String> colorCode = new HashSet<>();
         for (DocumentSnapshot ds:list) {
-            colorCode.add(ds.getString("colorCode"));
+            colorCode.add(ds.getString(Consts.COLOR_CODE));
         }
         if(colorCodes == null){
             colorCodes = new ArrayList<>();

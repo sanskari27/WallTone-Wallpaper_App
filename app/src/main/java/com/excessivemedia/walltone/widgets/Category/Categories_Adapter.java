@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.excessivemedia.walltone.R;
 import com.excessivemedia.walltone.helpers.CategoryUtils;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.excessivemedia.walltone.widgets.TransitionImageView.TransitionImageView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +49,8 @@ class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.Categor
         if(category==null){
             return;
         }
-        StorageReference imgRef = FirebaseStorage.getInstance().getReference("Walls").child("Thumbnail/"+category.getFileName()+".jpg");
+        StorageReference imgRef = FirebaseStorage.getInstance()
+                .getReference(Consts.WALLS).child(Consts.THUMBNAIL).child(category.getFileName()+".jpg");
 
         holder.name.setText(category.getCategoryName());
 

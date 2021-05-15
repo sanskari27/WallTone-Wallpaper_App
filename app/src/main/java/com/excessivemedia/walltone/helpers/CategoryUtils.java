@@ -65,8 +65,8 @@ public class CategoryUtils {
         db.get().addOnSuccessListener(queryDocumentSnapshots -> {
             Set<String> updatedList = new HashSet<>();
             for (DocumentSnapshot ds: queryDocumentSnapshots.getDocuments()) {
-                updatedList.add(ds.getString("name"));
-                if(categoryFiles.containsKey(ds.getString("name"))) continue;
+                updatedList.add(ds.getString(Consts.NAME));
+                if(categoryFiles.containsKey(ds.getString( Consts.NAME ) ) ) continue;
                 createFile(mContext,ds);
             }
             updateLocalFiles(updatedList);
@@ -89,15 +89,15 @@ public class CategoryUtils {
     public void createFile(Context mContext, DocumentSnapshot ds) {
         String relativeLocation = mContext.getFilesDir().getAbsolutePath() + "/" + CATEGORY;
         if(!new File(relativeLocation).exists()) new File(relativeLocation).mkdir();
-        File file = new File(relativeLocation,ds.getString("name")+".txt");
+        File file = new File(relativeLocation,ds.getString(Consts.NAME)+".txt");
 
         try {
             FileWriter fw = new FileWriter(file.getAbsolutePath());
             fw.append(ds.getId()).append("\n");
-            fw.append(ds.getString("category")).append("\n");
-            fw.append(ds.getString("colorCode")).append("\n");
-            fw.append(ds.getString("colorName")).append("\n");
-            List<String> list = (List<String>) ds.get("Tags");
+            fw.append(ds.getString(Consts.CATEGORY)).append("\n");
+            fw.append(ds.getString(Consts.COLOR_CODE)).append("\n");
+            fw.append(ds.getString(Consts.COLOR_NAME)).append("\n");
+            List<String> list = (List<String>) ds.get(Consts.TAGS);
             if(list!=null) {
                 for (int y = 0; y < list.size(); y++) {
                     fw.append(list.get(y).toLowerCase()).append(" ");

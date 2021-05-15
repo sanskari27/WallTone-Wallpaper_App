@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.excessivemedia.walltone.R;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -44,7 +45,7 @@ class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryVH> {
         Object obj = list.get(position);
         if(obj instanceof DocumentSnapshot){
             final DocumentSnapshot doc = (DocumentSnapshot) obj;
-            String name = doc.getString("name");
+            String name = doc.getString(Consts.NAME);
             thumbnails.child(name+".jpg").getDownloadUrl().addOnSuccessListener(uri -> {
                 Picasso.get().load(uri).into(holder.galleryImageView);
                 holder.itemView.setOnClickListener(v->{

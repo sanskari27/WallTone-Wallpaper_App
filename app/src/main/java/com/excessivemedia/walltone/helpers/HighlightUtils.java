@@ -86,9 +86,9 @@ public class HighlightUtils {
         try {
             FileWriter fw = new FileWriter(file.getAbsolutePath());
             fw.append(ds.getId()).append("\n");
-            fw.append(ds.getString("category")).append("\n");
-            fw.append(ds.getString("colorCode")).append("\n");
-            fw.append(ds.getString("colorName")).append("\n");
+            fw.append(ds.getString(Consts.CATEGORY)).append("\n");
+            fw.append(ds.getString(Consts.COLOR_CODE)).append("\n");
+            fw.append(ds.getString(Consts.COLOR_NAME)).append("\n");
             List<String> list = (List<String>) ds.get("Tags");
             if(list!=null) {
                 for (int y = 0; y < list.size(); y++) {

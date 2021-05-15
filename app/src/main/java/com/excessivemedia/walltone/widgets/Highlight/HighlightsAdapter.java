@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.excessivemedia.walltone.R;
+import com.excessivemedia.walltone.helpers.Consts;
 import com.excessivemedia.walltone.helpers.HighlightUtils;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -50,7 +51,8 @@ class HighlightsAdapter extends RecyclerView.Adapter<HighlightsAdapter.Highlight
         position = position % highlightList.size();
         String name = highlightList.get(position);
         holder.itemView.setTag(name);
-        StorageReference imgRef = FirebaseStorage.getInstance().getReference("Walls").child("Thumbnail/"+name+".jpg");
+        StorageReference imgRef = FirebaseStorage.getInstance()
+                .getReference(Consts.WALLS).child(Consts.THUMBNAIL).child(name+".jpg");
 
         File localFile = HighlightUtils.getInstance().getHighlight(name);
         if(localFile !=null){

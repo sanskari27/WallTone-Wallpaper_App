@@ -16,7 +16,7 @@ public class LikeManager {
     private final SharedPreferences likePref ;
 
     public LikeManager(Context context){
-        likePref = context.getSharedPreferences("likes",0);
+        likePref = context.getSharedPreferences(Consts.LIKE,0);
     }
 
     public boolean isliked(String id){
@@ -26,7 +26,7 @@ public class LikeManager {
         boolean b = likePref.getBoolean(id, false);
         b=!b;
         likePref.edit().putBoolean(id,b).apply();
-        FirebaseDatabase.getInstance().getReference("Users").child("likes").child(id).setValue(b);
+        FirebaseDatabase.getInstance().getReference(Consts.USERS).child(Consts.LIKE).child(id).setValue(b);
         return b;
     }
     public void setLiked(String id){
@@ -36,10 +36,11 @@ public class LikeManager {
     public void update() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user == null || user.isAnonymous()) return;
-        FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).child("likes").get().addOnSuccessListener(dataSnapshot -> {
-            for(DataSnapshot ds : dataSnapshot.getChildren()){
-                setLiked(ds.getKey());
-            }
+        FirebaseDatabase.getInstance().getReference(Consts.USERS).child(user.getUid())
+                .child(Consts.LIKE).get().addOnSuccessListener(dataSnapshot -> {
+                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+                        setLiked(ds.getKey());
+                    }
         });
     }
     public ArrayList<String> getLikedImagesId(){
