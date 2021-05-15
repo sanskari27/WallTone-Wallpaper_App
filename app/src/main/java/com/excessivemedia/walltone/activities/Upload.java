@@ -1,11 +1,7 @@
 package com.excessivemedia.walltone.activities;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -14,24 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.excessivemedia.walltone.R;
 import com.excessivemedia.walltone.widgets.DownloadProgressIndicator;
 import com.excessivemedia.walltone.widgets.GalleryView.Gallery;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.UploadTask;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.ArrayList;
 
 public class Upload extends AppCompatActivity {
@@ -60,26 +46,6 @@ public class Upload extends AppCompatActivity {
                     GALLERY_REQ);
         });
         findViewById(R.id.upload).setOnClickListener(this::upload);
-        findViewById(R.id.uploadTV).setOnLongClickListener(view -> uploadBulk());
-    }
-
-    private boolean uploadBulk() {
-        final EditText taskEditText = new EditText(this);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.MyThemeOverlay_MaterialComponents_MaterialAlertDialog)
-                .setTitle("Bulk Upload")
-                .setMessage("Enter Key")
-                .setView(taskEditText)
-                .setPositiveButton("Verify", (dialog1, which) -> {
-                    String text = String.valueOf(taskEditText.getText());
-                    if (text.equals("excessivemedia@walltone")) {
-                        startActivity(new Intent(Upload.this, UploadActivity.class));
-                        finish();
-                    }
-                })
-                .setNegativeButton("Cancel", null)
-                .create();
-        dialog.show();
-        return true;
     }
 
     private void upload(View v){
