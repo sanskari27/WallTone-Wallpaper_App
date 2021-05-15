@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/background_provider"
+    android:background="@drawable/google_signin_background"
+    android:padding="7dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="30dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="@string/continue_with_google"
+        android:textSize="16sp"
+        android:drawablePadding="20dp"
+        app:drawableStartCompat="@drawable/ic_google" />
+
+</FrameLayout>

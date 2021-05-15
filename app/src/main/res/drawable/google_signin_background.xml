@@ -1,0 +1,55 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:color="@color/divider"
+                android:width="0.5dp"/>
+            <solid android:color="#3C79E6"/>
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+    <item android:id="@+id/google_redColor">
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="center">
+            <shape
+                android:shape="rectangle">
+                <solid android:color="#CF2D48" />
+                <corners android:radius="20dp"/>
+            </shape>
+        </clip>
+    </item>
+    <item android:id="@+id/google_yellowColor">
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="center">
+            <shape
+                android:shape="rectangle">
+                <solid android:color="#FBBD00" />
+                <corners android:radius="20dp"/>
+            </shape>
+        </clip>
+    </item>
+    <item android:id="@+id/google_greenColor">
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="center">
+            <shape
+                android:shape="rectangle">
+                <solid android:color="#0F9D58" />
+                <corners android:radius="20dp"/>
+            </shape>
+        </clip>
+    </item>
+    <item android:id="@+id/google_blueColor">
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="center">
+            <shape
+                android:shape="rectangle">
+                <solid android:color="#3C79E6" />
+                <corners android:radius="20dp"/>
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.Home">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="350dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:text="@string/categories" />
+                <TextView
+                    android:id="@+id/moreCategories"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/blue"
+                    android:gravity="end"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.03"
+                    android:text="@string/more" />
+            </LinearLayout>
+            <com.excessivemedia.walltone.widgets.Category.Categories
+                android:id="@+id/categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoriesCount="4"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:text="@string/recent" />
+                <TextView
+                    android:id="@+id/more"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/blue"
+                    android:gravity="end"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.03"
+                    android:text="@string/more" />
+                </LinearLayout>
+            <com.excessivemedia.walltone.widgets.GalleryView.Gallery
+                android:id="@+id/galleryView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.excessivemedia.walltone.widgets.Highlight.Highlights
+        android:id="@+id/highlights"
+        app:cardElevation="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:translationZ="7dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/searchET"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/round_all"
+            android:outlineProvider="background"
+            android:backgroundTint="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            android:hint="@string/search"
+            android:layout_marginTop="85dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="60dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:maxLines="1"
+            android:drawableTint="@color/black"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="15dp"
+            android:inputType="text"
+            android:fontFamily="@font/montserrat"
+            android:importantForAutofill="no" />
+
+        <com.excessivemedia.walltone.widgets.ColorPicker.CustomColorPicker
+            android:id="@+id/color_picker"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="95dp"
+            app:cardElevation="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchResults"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/searchET"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="100dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/white"
+            android:text="@string/upload"
+            app:backgroundTint="#42A5F5"
+            android:layout_margin="30dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@color/light_sky_blue"
+        app:fabAlignmentMode="end"
+        app:fabCradleRoundedCornerRadius="32dp"
+        app:fabCradleMargin="8dp"
+        app:hideOnScroll="true"
+        android:background="@null"
+        app:navigationIcon="@drawable/ic_menu"
+        app:menu="@menu/bottom_app_bar"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/searchFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/black"
+        app:tint="@color/white"
+        app:layout_anchor="@id/bottomAppBar"
+        app:pressedTranslationZ="0dp"
+        app:elevation="10dp"
+        app:srcCompat="@drawable/ic_search"
+        android:contentDescription="@string/search_wallpapers" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

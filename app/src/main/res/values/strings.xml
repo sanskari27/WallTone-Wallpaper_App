@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">WallTone</string>
+
+    <string name="welcome">Revamp Wallpaper</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="skip">Skip</string>
+    <string name="or">OR</string>
+    <string name="logo">Logo</string>
+    <string name="search_wallpapers">Search Wallpapers</string>
+
+
+    <string name="categories">categories</string>
+    <string name="recent">recent</string>
+    <string name="apply">Apply</string>
+    <string name="download">Download</string>
+    <string name="like">Like</string>
+    <string name="wallpaper">wallpaper</string>
+    <string name="more">more…</string>
+    <string name="wallpapers">Wallpapers</string>
+    <string name="search">search</string>
+    <string name="downloads">Downloads</string>
+    <string name="favourites">Favourites</string>
+    <string name="upload">Upload</string>
+    <string name="gallery">Gallery</string>
+    <string name="highlight">highlight</string>
+    <string name="_percentage">%</string>
+    <string name="_0">0</string>
+    <string name="v3_2">v3.2</string>
+    <string name="cache">Cache</string>
+    <string name="clear">clear</string>
+    <string name="auto_wallpaper">Auto Wallpaper</string>
+    <string name="permission_detail">For better performance and smooth experience we need access to storage.</string>
+    <string name="permission_detail_2">Please ALLOW file permission.</string>
+    <string name="ok">OK</string>
+    <string name="hello">Hello</string>
+    <string name="open_setings">Open Setting</string>
+    <string name="add">ADD</string>
+    <string name="selectwallpaper">Select Wallpaper</string>
+    <string name="upload_wallpapers">Upload Wallpapers</string>
+    <string name="color_wheel">Color Wheel</string>
+    <string name="pick_color">Pick Color</string>
+    <string name="color">Color</string>
+
+
+</resources>

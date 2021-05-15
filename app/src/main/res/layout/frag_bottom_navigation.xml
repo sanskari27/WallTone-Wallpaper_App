@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/round_top"
+    android:outlineProvider="background"
+    android:backgroundTint= "@color/white"
+    android:orientation="vertical"
+    android:paddingTop="25dp"
+    android:paddingBottom="25dp"
+    tools:context=".activities.BottomNavigation">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/ic_walltone" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_bold"
+        android:letterSpacing="0.1"
+        android:textSize="20sp"
+        android:textAllCaps="true"
+        android:text="@string/app_name" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:textSize="16sp"
+        android:text="@string/v3_2" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:fontFamily="@font/montserrat"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:letterSpacing="0.05"
+            android:textColor="@color/black"
+            android:text="@string/cache" />
+        <TextView
+            android:id="@+id/cacheSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="70dp"
+            android:fontFamily="@font/montserrat"
+            android:padding="5dp"
+            android:letterSpacing="0.05"
+            android:textColor="@color/black"
+            android:text="" />
+        <TextView
+            android:id="@+id/clearCache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:fontFamily="@font/montserrat"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:background="@drawable/round_all_7"
+            android:outlineProvider="background"
+            android:backgroundTint="#F3584A"
+            android:letterSpacing="0.05"
+            android:textColor="@color/white"
+            android:text="@string/clear" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@color/black"
+        android:alpha="0.25"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:fontFamily="@font/montserrat"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:letterSpacing="0.05"
+            android:textColor="@color/black"
+            android:text="@string/auto_wallpaper" />
+
+        <com.excessivemedia.walltone.widgets.ColorPicker.CustomColorPicker
+            android:id="@+id/colorPicker"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardElevation="0dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="80dp"/>
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchAutoWallpaper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:track="@drawable/switchtrack"
+            android:thumb="@drawable/switchthumb"
+            android:layout_gravity="end"/>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@color/black"
+        android:alpha="0.25"/>
+</LinearLayout>

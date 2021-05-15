@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootLayout"
+    android:background="@color/black"
+    tools:context=".activities.Showcase">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/relatedLayout"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/transparent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:id="@+id/showcase_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/wallpaper" />
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/relatedLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/relatedWalls"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:elevation="1dp"
+        android:background="@drawable/gradient_black"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="125dp"
+            app:tint="@color/white"
+            app:elevation="5dp"
+            android:src="@drawable/ic_heart"
+            android:contentDescription="@string/like"
+            app:backgroundTint="#F3584A" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/applyWallpaper"
+            android:layout_width="150dp"
+            android:layout_height="56dp"
+            app:cardBackgroundColor="#0DA3FF"
+            android:layout_gravity="center"
+            app:cardCornerRadius="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:text="@string/apply" />
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/downloadWallpaper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="125dp"
+            android:src="@drawable/ic_download"
+            app:backgroundTint="@color/black"
+            app:elevation="5dp"
+            app:tint="@color/white"
+            android:contentDescription="@string/download" />
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
